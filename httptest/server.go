@@ -14,11 +14,12 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"net/http"
-	"net/http/internal"
 	"os"
 	"sync"
 	"time"
+
+	"github.com/hayeah/go-http"
+	"github.com/hayeah/go-http/internal"
 )
 
 // A Server is an HTTP server listening on a system-chosen port on the

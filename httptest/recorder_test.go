@@ -6,8 +6,8 @@ package httptest
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"io"
-	"net/http"
 	"testing"
 )
 

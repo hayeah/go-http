@@ -10,10 +10,10 @@ import (
 	"crypto/tls"
 	"crypto/x509"
 	"fmt"
+	. "github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
-	. "net/http"
-	"net/http/httptest"
+	"github.com/hayeah/go-http/httptest"
 	"strings"
 	"testing"
 )

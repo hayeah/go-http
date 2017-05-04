@@ -15,16 +15,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"internal/testenv"
+	. "github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
 	"log"
 	"math/rand"
 	"net"
-	. "net/http"
-	"net/http/httptest"
-	"net/http/httputil"
-	"net/http/internal"
+	"github.com/hayeah/go-http/httptest"
+	"github.com/hayeah/go-http/httputil"
 	"net/url"
 	"os"
 	"os/exec"
@@ -39,6 +37,10 @@ import (
 	"syscall"
 	"testing"
 	"time"
+
+	"github.com/hayeah/go-http/internal"
+
+	"github.com/hayeah/go-http/testenv"
 )
 
 type dummyAddr string

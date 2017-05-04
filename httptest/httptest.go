@@ -9,9 +9,9 @@ import (
 	"bufio"
 	"bytes"
 	"crypto/tls"
+	"github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"strings"
 )
 

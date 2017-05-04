@@ -6,8 +6,8 @@ package httptest
 
 import (
 	"bytes"
+	"github.com/hayeah/go-http"
 	"io/ioutil"
-	"net/http"
 	"strconv"
 	"strings"
 )

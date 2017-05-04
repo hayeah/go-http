@@ -17,10 +17,10 @@ package cgi
 import (
 	"bufio"
 	"fmt"
+	"github.com/hayeah/go-http"
 	"io"
 	"log"
 	"net"
-	"net/http"
 	"os"
 	"os/exec"
 	"path/filepath"

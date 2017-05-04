@@ -6,9 +6,9 @@ package httptest
 
 import (
 	"bufio"
+	"github.com/hayeah/go-http"
 	"io/ioutil"
 	"net"
-	"net/http"
 	"testing"
 )
 

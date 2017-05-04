@@ -6,11 +6,11 @@ package httputil_test
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/http/httptest"
-	"net/http/httputil"
+	"github.com/hayeah/go-http/httptest"
+	"github.com/hayeah/go-http/httputil"
 	"net/url"
 	"strings"
 )

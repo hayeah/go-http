@@ -6,10 +6,10 @@ package cookiejar_test
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"log"
-	"net/http"
-	"net/http/cookiejar"
-	"net/http/httptest"
+	"github.com/hayeah/go-http/cookiejar"
+	"github.com/hayeah/go-http/httptest"
 	"net/url"
 )
 

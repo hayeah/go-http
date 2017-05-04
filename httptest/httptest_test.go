@@ -6,9 +6,9 @@ package httptest
 
 import (
 	"crypto/tls"
+	"github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"net/url"
 	"reflect"
 	"strings"

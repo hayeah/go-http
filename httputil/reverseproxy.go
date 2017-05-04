@@ -8,10 +8,10 @@ package httputil
 
 import (
 	"context"
+	"github.com/hayeah/go-http"
 	"io"
 	"log"
 	"net"
-	"net/http"
 	"net/url"
 	"strings"
 	"sync"

@@ -6,9 +6,9 @@ package httptrace_test
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"log"
-	"net/http"
-	"net/http/httptrace"
+	"github.com/hayeah/go-http/httptrace"
 )
 
 func Example() {

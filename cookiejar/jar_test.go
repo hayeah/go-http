@@ -6,7 +6,7 @@ package cookiejar
 
 import (
 	"fmt"
-	"net/http"
+	"github.com/hayeah/go-http"
 	"net/url"
 	"sort"
 	"strings"

@@ -8,8 +8,8 @@ package cookiejar
 import (
 	"errors"
 	"fmt"
+	"github.com/hayeah/go-http"
 	"net"
-	"net/http"
 	"net/url"
 	"sort"
 	"strings"

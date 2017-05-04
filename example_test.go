@@ -6,10 +6,10 @@ package http_test
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
 )
 
 func ExampleHijacker() {

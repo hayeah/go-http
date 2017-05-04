@@ -6,11 +6,11 @@ package httptest_test
 
 import (
 	"fmt"
+	"github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
 	"log"
-	"net/http"
-	"net/http/httptest"
+	"github.com/hayeah/go-http/httptest"
 )
 
 func ExampleResponseRecorder() {

@@ -7,9 +7,9 @@ package fcgi
 import (
 	"bytes"
 	"errors"
+	"github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
-	"net/http"
 	"testing"
 )
 

@@ -13,12 +13,13 @@ import (
 	"go/ast"
 	"io"
 	"io/ioutil"
-	"net/http/internal"
 	"net/url"
 	"reflect"
 	"regexp"
 	"strings"
 	"testing"
+
+	"github.com/hayeah/go-http/internal"
 )
 
 type respTest struct {

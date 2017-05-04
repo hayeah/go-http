@@ -19,17 +19,14 @@ import (
 	"encoding/binary"
 	"errors"
 	"fmt"
-	"internal/nettrace"
-	"internal/testenv"
+	. "github.com/hayeah/go-http"
 	"io"
 	"io/ioutil"
 	"log"
 	"net"
-	. "net/http"
-	"net/http/httptest"
-	"net/http/httptrace"
-	"net/http/httputil"
-	"net/http/internal"
+	"github.com/hayeah/go-http/httptest"
+	"github.com/hayeah/go-http/httptrace"
+	"github.com/hayeah/go-http/httputil"
 	"net/url"
 	"os"
 	"reflect"
@@ -40,6 +37,12 @@ import (
 	"sync/atomic"
 	"testing"
 	"time"
+
+	"github.com/hayeah/go-http/internal"
+
+	"github.com/hayeah/go-http/nettrace"
+
+	"github.com/hayeah/go-http/testenv"
 )
 
 // TODO: test 5 pipelined requests with responses: 1) OK, 2) OK, Connection: Close
