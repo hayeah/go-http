@@ -19,12 +19,13 @@ import (
 	"mime"
 	"mime/multipart"
 	"net"
-	"github.com/hayeah/go-http/httptrace"
 	"net/textproto"
 	"net/url"
 	"strconv"
 	"strings"
 	"sync"
+
+	"github.com/hayeah/go-http/httptrace"
 
 	"golang.org/x/net/idna"
 )
@@ -82,8 +83,8 @@ func (e *badStringError) Error() string { return fmt.Sprintf("%s %q", e.what, e.
 
 // Headers that Request.Write handles itself and should be skipped.
 var reqWriteExcludeHeader = map[string]bool{
-	"Host":              true, // not in Header map anyway
-	"User-Agent":        true,
+	"Host": true, // not in Header map anyway
+	// "User-Agent":        true,
 	"Content-Length":    true,
 	"Transfer-Encoding": true,
 	"Trailer":           true,
@@ -551,15 +552,8 @@ func (req *Request) write(w io.Writer, usingProxy bool, extraHeaders Header, wai
 
 	// Use the defaultUserAgent unless the Header contains one, which
 	// may be blank to not send the header.
-	userAgent := defaultUserAgent
-	if _, ok := req.Header["User-Agent"]; ok {
-		userAgent = req.Header.Get("User-Agent")
-	}
-	if userAgent != "" {
-		_, err = fmt.Fprintf(w, "User-Agent: %s\r\n", userAgent)
-		if err != nil {
-			return err
-		}
+	if _, ok := req.Header["User-Agent"]; !ok {
+		req.Header.Add("User-Agent", defaultUserAgent)
 	}
 
 	// Process Body,ContentLength,Close,Trailer

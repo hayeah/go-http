@@ -13,6 +13,18 @@ import (
 	"time"
 )
 
+// determines the output order of headers. Should be negative number. Smaller ranks output first. Default rank is 0.
+var headerRanks = map[string]int{}
+
+// FixHeaderNamesOrder ensures that the specified header names are // output in that order
+func FixHeaderNamesOrder(names []string) {
+	for i := 0; i < len(names); i++ {
+		key := CanonicalHeaderKey(names[i])
+		rank := -(len(names) - i)
+		headerRanks[key] = rank
+	}
+}
+
 var raceEnabled = false // set by race.go
 
 // A Header represents the key-value pairs in an HTTP header.
@@ -104,6 +116,7 @@ func (w stringWriter) WriteString(s string) (n int, err error) {
 }
 
 type keyValues struct {
+	rank   int
 	key    string
 	values []string
 }
@@ -115,9 +128,15 @@ type headerSorter struct {
 	kvs []keyValues
 }
 
-func (s *headerSorter) Len() int           { return len(s.kvs) }
-func (s *headerSorter) Swap(i, j int)      { s.kvs[i], s.kvs[j] = s.kvs[j], s.kvs[i] }
-func (s *headerSorter) Less(i, j int) bool { return s.kvs[i].key < s.kvs[j].key }
+func (s *headerSorter) Len() int      { return len(s.kvs) }
+func (s *headerSorter) Swap(i, j int) { s.kvs[i], s.kvs[j] = s.kvs[j], s.kvs[i] }
+func (s *headerSorter) Less(i, j int) bool {
+	if s.kvs[i].rank == 0 && s.kvs[j].rank == 0 {
+		return s.kvs[i].key < s.kvs[j].key
+	}
+
+	return s.kvs[i].rank < s.kvs[j].rank
+}
 
 var headerSorterPool = sync.Pool{
 	New: func() interface{} { return new(headerSorter) },
@@ -133,8 +152,13 @@ func (h Header) sortedKeyValues(exclude map[string]bool) (kvs []keyValues, hs *h
 	}
 	kvs = hs.kvs[:0]
 	for k, vv := range h {
+		keyrank := 0
+		if rank, ok := headerRanks[k]; ok {
+			keyrank = rank
+		}
+
 		if !exclude[k] {
-			kvs = append(kvs, keyValues{k, vv})
+			kvs = append(kvs, keyValues{keyrank, k, vv})
 		}
 	}
 	hs.kvs = kvs
