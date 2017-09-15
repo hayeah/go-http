@@ -13,15 +13,21 @@ import (
 	"time"
 )
 
+const DamnHeaderFieldsOrder = "damn-header-fields-order"
+
 // determines the output order of headers. Should be negative number. Smaller ranks output first. Default rank is 0.
 var headerRanks = map[string]int{}
 
 // FixHeaderNamesOrder ensures that the specified header names are // output in that order
 func FixHeaderNamesOrder(names []string) {
+	buildHeaderRanks(names, headerRanks)
+}
+
+func buildHeaderRanks(names []string, ranks map[string]int) {
 	for i := 0; i < len(names); i++ {
 		key := CanonicalHeaderKey(names[i])
 		rank := -(len(names) - i)
-		headerRanks[key] = rank
+		ranks[key] = rank
 	}
 }
 
@@ -151,13 +157,18 @@ func (h Header) sortedKeyValues(exclude map[string]bool) (kvs []keyValues, hs *h
 		hs.kvs = make([]keyValues, 0, len(h))
 	}
 	kvs = hs.kvs[:0]
-	for k, vv := range h {
-		keyrank := 0
-		if rank, ok := headerRanks[k]; ok {
-			keyrank = rank
-		}
+	ranks := make(map[string]int)
 
-		if !exclude[k] {
+	if names, ok := h[DamnHeaderFieldsOrder]; ok {
+		buildHeaderRanks(names, ranks)
+	} else {
+		ranks = headerRanks
+	}
+
+	for k, vv := range h {
+		keyrank := ranks[k]
+
+		if !exclude[k] && k != DamnHeaderFieldsOrder {
 			kvs = append(kvs, keyValues{keyrank, k, vv})
 		}
 	}
